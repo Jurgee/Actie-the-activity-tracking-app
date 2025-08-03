@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Actie.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+
+    xmlns:user="clr-namespace:Actie.App.Views.User"
+    xmlns:proj="clr-namespace:Actie.App.Views.Project"
+    xmlns:act="clr-namespace:Actie.App.Views.Activity"
+    xmlns:tag="clr-namespace:Actie.App.Views.Tag"
+    xmlns:views="clr-namespace:Actie.App.Views"
+
+    FlyoutBehavior="Disabled">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate views:LogInView}"
+        Route="users" />
+
+</Shell>
+
+

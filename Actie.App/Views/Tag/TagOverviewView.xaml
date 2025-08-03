@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:viewModels="using:Actie.App.ViewModels"
+             x:Class="Actie.App.Views.Tag.TagOverviewView"
+             x:DataType="viewModels:TagOverviewViewModel">
+
+
+    <Grid RowDefinitions="100, *">
+        <Grid Grid.Row="0">
+            <Label Text="Tags"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="46"/>
+            <Button Text="Add Tag"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Margin="0,0,25,0"
+                    Command="{Binding GoToAddTagCommand}"
+                    />
+        </Grid>
+        <Line BackgroundColor="White"
+              HeightRequest="100"
+              VerticalOptions="End"/>
+
+
+
+        <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding  Tags}"
+                        HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:TagListModel">
+                    <Frame Padding="0"
+                           Margin="0,25,0,0"
+                           CornerRadius="10"
+                           BorderColor="White"
+                           WidthRequest="320" HeightRequest="75"
+                           IsClippedToBounds="True">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type viewModels:TagOverviewViewModel}}, Path=GoToTagDetailCommand}"
+                                                  CommandParameter="{Binding Id}" />
+                        </Frame.GestureRecognizers>
+
+                        <ScrollView>
+                            <VerticalStackLayout>
+                                <Label
+                                    Margin="22,12"
+                                    FontSize="20" LineBreakMode="WordWrap"
+                                    Text="{Binding Name}"
+                                    TextColor="White" VerticalOptions="Start" />
+
+                            </VerticalStackLayout>
+
+                        </ScrollView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+
+</views:ContentPageBase>

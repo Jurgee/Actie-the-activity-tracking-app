@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             x:Class="Actie.App.Views.Project.AddProjectView"
+             x:DataType="vm:AddProjectViewModel">
+
+
+    <Grid RowDefinitions="100, Auto, *">
+        <Label Grid.Row="0"
+               Text="Add Project"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               FontSize="46"/>
+
+        <Line BackgroundColor="White"
+              VerticalOptions="End" />
+
+
+        <Grid Grid.Row="1"
+              RowDefinitions="100,*">
+
+            <VerticalStackLayout Grid.Row="0"
+                                 Margin="10">
+                <Label Text="Name"
+                       VerticalOptions="Center"/>
+                <Entry Placeholder="Enter project name"
+                       Text="{Binding Project.Name}" />
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="1"
+                                 Margin="10">
+                <Label Text="Description"
+                           VerticalOptions="Center"/>
+                <Entry Placeholder="Enter project description"
+                       Text="{Binding Project.Description}" />
+            </VerticalStackLayout>
+
+        </Grid>
+        <Button Grid.Row="0"
+                Text="Save Project"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                HeightRequest="50"
+                WidthRequest="150"
+                Margin="0,0,25,25"
+                Command="{Binding SaveCommand}"/>
+
+    </Grid>
+
+    <!-- Jmeno Popis -->
+
+</views:ContentPageBase>

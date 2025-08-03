@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             x:Class="Actie.App.Views.Tag.DetailTagView"
+             x:DataType="vm:DetailTagViewModel"
+             x:Name="DetailTagViewRoot">
+
+
+
+    <Grid RowDefinitions="Auto, Auto, *">
+        <Grid Grid.Row="0"
+              ColumnDefinitions="auto, *, auto">
+            <Label Grid.Column="0"
+                   Margin="30"
+                   FontSize="46"
+                   Text="{Binding Tag.Name}"
+                   LineBreakMode="WordWrap"
+                   MaximumHeightRequest="400"/>
+
+
+        </Grid>
+
+        <Label Grid.Row="1"
+               FontSize="24"
+               Margin="35,0"
+               LineBreakMode="WordWrap"
+               Text="{Binding Tag.Description}"/>
+
+        <Button Grid.Row="2"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Text="Edit Tag"
+                HeightRequest="75"
+                WidthRequest="150"
+                FontSize="22"
+                Margin="0,0,50,50"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetailTagViewModel}}, Path=GoToEditTagCommand}"
+                    CommandParameter="{Binding Id}" />
+        <Button Grid.Row="2"
+                VerticalOptions="End"
+                HorizontalOptions="Start"
+                BackgroundColor="Red"
+                TextColor="White"
+                Text="Delete Tag"
+                HeightRequest="75"
+                WidthRequest="150"
+                FontSize="22"
+                Margin="50,0,0,50"
+                Command="{Binding DeleteCommand}"/>
+    </Grid>
+
+</views:ContentPageBase>

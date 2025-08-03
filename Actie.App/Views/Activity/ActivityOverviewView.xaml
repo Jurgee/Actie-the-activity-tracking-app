@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             x:DataType="vm:ActivityOverviewViewModel"
+             x:Class="Actie.App.Views.Activity.ActivityOverviewView">
+
+    <Grid RowDefinitions="100,75, *">
+        <Grid Grid.Row="0">
+            <Label Text="Activities"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="46"/>
+            <Button Text="Add Activity"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Margin="0,0,25,0"
+                    Command="{Binding GoToAddActivityCommand}"
+            />
+        </Grid>
+        <Line BackgroundColor="White"
+              HeightRequest="100"
+              VerticalOptions="End"/>
+
+            <Grid Grid.Row="1"
+                  ColumnDefinitions="*, auto">
+
+                <HorizontalStackLayout Grid.Column="0">
+                    <Label  Text="From: "
+                            Margin="25,0,0,0"
+                            VerticalOptions="Center"
+                            FontSize="24"/>
+                    <DatePicker Margin="10,0"
+                                Date="{Binding FromDate}">
+                    </DatePicker>
+                    <TimePicker Margin="0,12,0,0"
+                                Time="{Binding FromTime}">
+                    </TimePicker>
+
+                    <Label Text="To: "
+                           Margin="10,0,0,0"
+                           VerticalOptions="Center"
+                           FontSize="24"/>
+                    <DatePicker Margin="10,0"
+                                Date="{Binding ToDate}">
+                    </DatePicker>
+                    <TimePicker Margin="0,12,0,0"
+                                Time="{Binding ToTime}">
+                    </TimePicker>
+
+                    
+
+                </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Column="1">
+                <Label Text="Fast filter"
+                       VerticalOptions="Center"
+                       FontSize="24"></Label>
+
+                <Picker HeightRequest="50"
+                        WidthRequest="175"
+                        Margin="15,0"
+                        HorizontalOptions="End"
+                        ItemsSource="{Binding PickerItems}"
+                        ItemDisplayBinding="{Binding Range}"
+                        SelectedItem="{Binding SelectedPicker}">
+                </Picker>
+                </HorizontalStackLayout>
+
+        </Grid>
+
+
+        <Line Grid.Row="1"
+                  BackgroundColor="White"
+                  HeightRequest="100"
+                  VerticalOptions="End"/>
+
+
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Activities}"
+                        HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3" />
+            </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="m:ActivityListModel">
+                            <Frame Padding="0"
+                                   Margin="0,25,0,0"
+                                   BorderColor="White"
+                                   CornerRadius="10"
+                                   WidthRequest="320" HeightRequest="160">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ActivityOverviewViewModel}}, Path=GoToActivityDetailCommand}"
+                                                                                CommandParameter="{Binding Id}" />
+                                </Frame.GestureRecognizers>
+
+                       
+                        <ScrollView>
+                            <VerticalStackLayout>
+                                    <Label
+                                           Margin="20,12"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Name}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label Margin="20,0"
+                                        FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Start}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label Margin="20,0"
+                                        FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding End}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label Margin="20,12,0,0"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Type}"
+                                           TextColor="White" VerticalOptions="End" />
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+        
+    </Grid>
+
+
+</views:ContentPageBase>

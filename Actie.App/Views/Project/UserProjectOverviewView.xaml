@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             xmlns:views="clr-namespace:Actie.App.View"
+             x:Class="Actie.App.Views.Project.UserProjectOverviewView"
+             x:DataType="vm:UserProjectOverviewViewModel">
+
+    <Grid  RowDefinitions="100, *">
+        <Grid Grid.Row="0">
+            <Label 
+                   Text="My Projects"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center"
+                   FontSize="46"/>
+            <Button Text="Add Project"
+                    VerticalOptions="Center"
+                    HorizontalOptions="End"
+                    Margin="0,0,25,0"
+                    Command="{Binding GoToAddProjectCommand}"
+                />
+        </Grid>
+        <Line BackgroundColor="White"
+                  HeightRequest="100"
+                  VerticalOptions="End"/>
+
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding Projects}"
+                            HorizontalOptions="FillAndExpand">
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical"
+                                 Span="3"/>
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="m:ProjectListModel">
+                    <Frame Padding="0"
+                           Margin="0,25,0,0"
+                           CornerRadius="10"
+                           BorderColor="White"
+                           WidthRequest="320" HeightRequest="100">
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:UserProjectOverviewViewModel}}, Path=GoToProjectDetailCommand}"
+                                                  CommandParameter="{Binding Id}" />
+                        </Frame.GestureRecognizers>
+                        <ScrollView>
+                            <VerticalStackLayout>
+                                <Label
+                                Margin="22,12"
+                                FontSize="20" LineBreakMode="WordWrap"
+                                Text="{Binding Name}"
+                                TextColor="White" VerticalOptions="End" />
+
+                            </VerticalStackLayout>
+                        </ScrollView>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
+
+</views:ContentPageBase>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             xmlns:activity="using:Actie.App.Views.Activity"
+             x:DataType="vm:AddActivityViewModel"
+             x:Class="Actie.App.Views.Activity.AddActivityView">
+
+
+    <Grid RowDefinitions="100, Auto, *">
+        <Label Grid.Row="0"
+               Text="Add Activity"
+               VerticalOptions="Center"
+               HorizontalOptions="Center"
+               FontSize="46"/>
+
+        <Line BackgroundColor="White"
+              VerticalOptions="End" />
+
+
+        <Grid Grid.Row="1"
+              RowDefinitions="100,100,100,100,*">
+
+            <VerticalStackLayout Grid.Row="0"
+                                 Margin="10">
+                <Label Text="Name"
+                       VerticalOptions="Center"/>
+                <Entry Placeholder="Enter  name"
+                       Text="{Binding Name}"/>
+            </VerticalStackLayout>
+
+            <HorizontalStackLayout Grid.Row="1"
+                                   Margin="4,10,10,10">
+                <VerticalStackLayout Margin="10,0">
+                    <Label Text="Start date"
+                           VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding StartDate}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="10,0">
+                    <Label Text="Start time"
+                           VerticalOptions="Center"/>
+                    <TimePicker Margin="0,7,0,0"
+                                Time="{Binding StartTime}"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="10,0">
+                    <Label Text="End date"
+                           VerticalOptions="Center"/>
+                    <DatePicker Date="{Binding EndDate}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="10,0">
+                    <Label Text="End time"
+                           VerticalOptions="Center"/>
+                    <TimePicker Margin="0,7,0,0"
+                                Time="{Binding EndTime}"/>
+                </VerticalStackLayout>
+                
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Grid.Row="2">
+
+                <VerticalStackLayout Margin="10">
+                    <Label Text="Type"
+                           VerticalOptions="Center" />
+                    <Entry Placeholder="Enter activity type"
+                           WidthRequest="150"
+                           Text="{Binding Type}"/>
+                </VerticalStackLayout>
+
+                <VerticalStackLayout Margin="10">
+                    <Label Text="Rating (out of 5)"
+                           VerticalOptions="Center"/>
+                    <Entry Placeholder="Enter activity rating"
+                           WidthRequest="150"
+                           Text="{Binding ActivityModel.Rating}"
+                           Keyboard="Numeric"/>
+                </VerticalStackLayout>
+            </HorizontalStackLayout>
+
+            <VerticalStackLayout Grid.Row="3"
+                                     Margin="10">
+                <Label Text="Description"
+                       VerticalOptions="Center"/>
+                <Entry Placeholder="Enter activity description"
+                       Text="{Binding ActivityModel.Description}"/>
+            </VerticalStackLayout>
+
+            <VerticalStackLayout Grid.Row="4"
+                                   Margin="10">
+                <Label Text="Add to project"
+                       VerticalOptions="Center"/>
+                <Picker
+                    WidthRequest="200"
+                    HorizontalOptions="Start"
+                    ItemsSource="{Binding MyProjects}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelectedProject}">
+                </Picker>
+            </VerticalStackLayout>
+
+
+        </Grid>
+        <Button x:Name="SaveButton"
+                Grid.Row="0"
+                Text="Save Activity"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                HeightRequest="50"
+                WidthRequest="150"
+                Margin="0,0,25,25"
+                IsEnabled="{Binding CanSave, Mode=TwoWay}"
+                Command="{Binding SaveCommand}"/>
+
+    </Grid>
+
+    <!-- Jmeno Start date Konec date Typ Hodnoceni Popis -->
+
+</views:ContentPageBase>

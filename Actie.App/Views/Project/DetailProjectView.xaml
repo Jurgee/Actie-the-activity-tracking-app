@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:Actie.App.View"
+             xmlns:m="clr-namespace:Actie.BL.Models;assembly=Actie.BL"
+             xmlns:vm="clr-namespace:Actie.App.ViewModels"
+             x:Class="Actie.App.Views.Project.DetailProjectView"
+             x:DataType="vm:DetailProjectViewModel"
+             x:Name="DetailProjectViewRoot">
+
+    <Grid RowDefinitions="Auto, Auto, Auto, *">
+        <Label Grid.Row="0"
+               Margin="30"
+               FontSize="46"
+               Text="{Binding Project.Name}"
+               LineBreakMode="WordWrap"
+               MaximumHeightRequest="400"/>
+
+
+        <Label Grid.Row="1"
+               FontSize="24"
+               Margin="35,0"
+               LineBreakMode="WordWrap"
+               Text="{Binding Project.Description}"/>
+
+        <CollectionView Grid.Row="2"
+                        Margin="50,0"
+                        MaximumHeightRequest="350"
+                        ItemsSource="{Binding Project.Activities}"
+                        HorizontalOptions="FillAndExpand">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     Span="3" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="m:ActivityListModel">
+                        <Frame Padding="0"
+                               Margin="0,25,0,0"
+                               BorderColor="White"
+                               CornerRadius="10"
+                               WidthRequest="320" HeightRequest="160">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetailProjectViewModel}}, Path=GoToActivityDetailCommand}"
+                                                      CommandParameter="{Binding Id}" />
+                            </Frame.GestureRecognizers>
+
+                            <ScrollView>
+                                <VerticalStackLayout>
+                                    <Label
+                                           Margin="22,12"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Name}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label
+                                           Margin="20,0"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Start}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label
+                                           Margin="20,0"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding End}"
+                                           TextColor="White" VerticalOptions="End" />
+                                    <Label Margin="20,12,0,0"
+                                           FontSize="20" LineBreakMode="WordWrap"
+                                           Text="{Binding Type}"
+                                           TextColor="White" VerticalOptions="End" />
+                            </VerticalStackLayout>
+                            </ScrollView>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        <Button Grid.Row="3"
+                VerticalOptions="End"
+                HorizontalOptions="End"
+                Text="Edit Project"
+                HeightRequest="75"
+                WidthRequest="150"
+                FontSize="22"
+                Margin="0,0,50,50"
+                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:DetailProjectViewModel}}, Path=GoToEditProjectCommand}"
+                CommandParameter="{Binding Id}" />
+        <Button Grid.Row="3"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                Text="Join Project"
+                HeightRequest="75"
+                WidthRequest="150"
+                FontSize="22"
+                Margin="0,0,50,50"
+                IsVisible="{Binding SeeJoin}"
+                Command="{Binding JoinProjectCommand}"/>
+        <Button Grid.Row="3"
+                VerticalOptions="End"
+                HorizontalOptions="Center"
+                Text="Leave Project"
+                HeightRequest="75"
+                WidthRequest="200"
+                FontSize="22"
+                Margin="0,0,50,50"
+                IsVisible="{Binding SeeLeave}"
+                Command="{Binding LeaveProjectCommand}"/>
+        <Button Grid.Row="3"
+            VerticalOptions="End"
+            HorizontalOptions="Start"
+            BackgroundColor="Red"
+            TextColor="White"
+            Text="Delete Project"
+            Command="{Binding DeleteCommand}"
+            HeightRequest="75"
+            WidthRequest="200"
+            FontSize="22"
+            Margin="50,0,0,50"/>
+    </Grid>
+
+
+</views:ContentPageBase>
